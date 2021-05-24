@@ -1,6 +1,6 @@
 import { EnrollStudent } from "./EnrollStudent";
 
-let enrollStudent;
+let enrollStudent: EnrollStudent;
 
 describe('EnrollStudent', () => {
   beforeEach(() => {
@@ -9,7 +9,8 @@ describe('EnrollStudent', () => {
   it('should not be able enroll without valid student name', () => {
     const enrollmentRequest = {
       student: {
-        name: 'Ana'
+        name: 'Ana',
+        cpf: 'any_cpf'
       }
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Invalid student name"))
@@ -22,5 +23,15 @@ describe('EnrollStudent', () => {
       }
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Invalid student cpf"))
+  });
+  it('Should not enroll duplicated student', () => {
+    const enrollmentRequest = {
+      student: {
+        name: "Ana Silva",
+        cpf: "832.081.519-34"
+      }
+    }
+    enrollStudent.execute(enrollmentRequest)
+    expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Enrollment with duplicated student is not allowed"))
   });
 });
