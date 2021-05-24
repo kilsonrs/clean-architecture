@@ -21,7 +21,7 @@ Projeto da primeira turma do<a href="https://app.agilecode.com.br/public/product
 
 <p align="center">
 <h3>
-🚧 Projeto em andamento 🚧
+🚧 Curso em andamento 🚧
 </h3>
 </p>
 
