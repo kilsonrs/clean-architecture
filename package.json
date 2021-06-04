@@ -6,7 +6,7 @@
   "scripts": {
     "tsc:init": "tsc --init",
     "build": "tsc",
-    "test": "tsc && jest dist/"
+    "test": "rm -rf dist/ && tsc && jest dist/"
   },
   "dependencies": {
     "typescript": "^4.2.4"
