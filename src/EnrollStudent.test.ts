@@ -1,17 +1,28 @@
+import LevelRepositoryMemory from "./LevelRepositoryMemory";
+import ModuleRepositoryMemory from "./ModuleRepositoryMemory";
+import ClassRepositoryMemory from "./ClassRepositoryMemory";
+import EnrollmentRepositoryMemory from "./EnrollmentRepositoryMemory";
 import { EnrollStudent } from "./EnrollStudent";
 
 let enrollStudent: EnrollStudent;
 
 describe('EnrollStudent', () => {
   beforeEach(() => {
-    enrollStudent = new EnrollStudent();
+    const levelRepository = new LevelRepositoryMemory()
+    const moduleRepository = new ModuleRepositoryMemory()
+    const classRepository = new ClassRepositoryMemory()
+    const enrollmentRepositoryMemory = new EnrollmentRepositoryMemory()
+    enrollStudent = new EnrollStudent(levelRepository, moduleRepository, classRepository, enrollmentRepositoryMemory);
   });
   it('should not be able enroll without valid student name', () => {
     const enrollmentRequest = {
       student: {
         name: 'Ana',
         cpf: 'any_cpf'
-      }
+      },
+      level: "EM",
+      module: "1",
+      class: "A"
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Invalid student name"))
   });
