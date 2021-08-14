@@ -1,3 +1,5 @@
-export default interface ModuleRepository {
-  findByCode(level: string, code: string): any;
+import { Module } from './Module'
+
+export interface ModuleRepository {
+  findByCode(level: string, code: string): Module
 }

@@ -1,3 +1,5 @@
-export default interface LevelRepository {
-  findByCode(code: string): any;
+import { Level } from './Level'
+
+export interface LevelRepository {
+  findByCode(code: string): Level
 }

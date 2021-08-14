@@ -1,7 +1,7 @@
-import { Cpf } from "./Cpf"
-import { Name } from "./Name"
+import { Cpf } from './Cpf'
+import { Name } from './Name'
 
-export default class Student {
+export class Student {
   name: Name
   cpf: Cpf
   birthDate: Date
@@ -13,6 +13,6 @@ export default class Student {
   }
 
   getAge() {
-    return new Date().getFullYear() - this.birthDate.getFullYear();
+    return new Date().getFullYear() - this.birthDate.getFullYear()
   }
 }
