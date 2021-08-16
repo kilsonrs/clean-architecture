@@ -14,14 +14,14 @@
 
 <br />
 
-Projeto da primeira turma do<a href="https://app.agilecode.com.br/public/products/cd4aea57-4b43-41e9-bda5-f487c3817b29" target="_blank" rel="noopener noreferrer"> curso de Clean Code e Clean Architecture </a>com Rodrigo Branas.
+Projeto da primeira turma online do<a href="https://app.agilecode.com.br/public/products/cd4aea57-4b43-41e9-bda5-f487c3817b29" target="_blank" rel="noopener noreferrer"> curso de Clean Code e Clean Architecture </a>com Rodrigo Branas.
 
 <br />
 <br />
 
 <p align="center">
 <h3>
-🚧 Curso em andamento 🚧
+🚧 progredindo... 🚧
 </h3>
 </p>
 
