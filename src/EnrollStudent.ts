@@ -3,6 +3,7 @@ import { Enrollment } from './Enrollment'
 import { EnrollmentRepository } from './EnrollmentRepository'
 import { LevelRepository } from './LevelRepository'
 import { ModuleRepository } from './ModuleRepository'
+import { RepositoryAbstractFactory } from './RepositoryAbstractFactory'
 import { Student } from './Student'
 
 export class EnrollStudent {
@@ -11,17 +12,23 @@ export class EnrollStudent {
   classroomRepository: ClassroomRepository
   enrollmentRepository: EnrollmentRepository
 
-  constructor(
-    levelRepository: LevelRepository,
-    moduleRepository: ModuleRepository,
-    classroomRepository: ClassroomRepository,
-    enrollmentRepository: EnrollmentRepository
-  ) {
-    this.levelRepository = levelRepository
-    this.moduleRepository = moduleRepository
-    this.classroomRepository = classroomRepository
-    this.enrollmentRepository = enrollmentRepository
+  constructor(repositoryFacade: RepositoryAbstractFactory) {
+    this.levelRepository = repositoryFacade.createLevelRepository()
+    this.moduleRepository = repositoryFacade.createModuleRepository()
+    this.classroomRepository = repositoryFacade.createClassroomRepository()
+    this.enrollmentRepository = repositoryFacade.createEnrollmentRepository()
   }
+  // constructor(
+  //   levelRepository: LevelRepository,
+  //   moduleRepository: ModuleRepository,
+  //   classroomRepository: ClassroomRepository,
+  //   enrollmentRepository: EnrollmentRepository
+  // ) {
+  //   this.levelRepository = levelRepository
+  //   this.moduleRepository = moduleRepository
+  //   this.classroomRepository = classroomRepository
+  //   this.enrollmentRepository = enrollmentRepository
+  // }
 
   execute(enrollmentRequest: any) {
     const student = new Student(

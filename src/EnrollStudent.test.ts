@@ -1,28 +1,14 @@
-import { LevelRepositoryMemory } from './LevelRepositoryMemory'
-import { ModuleRepositoryMemory } from './ModuleRepositoryMemory'
-import { ClassroomRepositoryMemory } from './ClassroomRepositoryMemory'
-import { EnrollmentRepositoryMemory } from './EnrollmentRepositoryMemory'
 import { EnrollStudent } from './EnrollStudent'
+import { RepositoryMemoryFactory } from './RepositoryMemoryFactory'
 
 let enrollStudent: EnrollStudent
 
 describe('EnrollStudent', () => {
-  beforeAll(() => {
-    jest.useFakeTimers('modern').setSystemTime(new Date(2021, 5, 6))
-  })
-  beforeEach(() => {
-    const levelRepository = new LevelRepositoryMemory()
-    const moduleRepository = new ModuleRepositoryMemory()
-    const classroomRepository = new ClassroomRepositoryMemory()
-    const enrollmentRepositoryMemory = new EnrollmentRepositoryMemory()
-    enrollStudent = new EnrollStudent(
-      levelRepository,
-      moduleRepository,
-      classroomRepository,
-      enrollmentRepositoryMemory
-    )
-  })
-  it('should not be able enroll without valid student name', () => {
+  beforeAll(() => { jest.useFakeTimers('modern').setSystemTime(new Date(2021, 5, 6))})
+
+  beforeEach(() => { enrollStudent = new EnrollStudent(new RepositoryMemoryFactory())})
+
+  test('Should not be able enroll without valid student name', () => {
     const enrollmentRequest = {
       student: {
         name: 'Ana',
@@ -34,7 +20,8 @@ describe('EnrollStudent', () => {
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Invalid student name'))
   })
-  it('Should not enroll without valid student cpf', () => {
+
+  test('Should not enroll without valid student cpf', () => {
     const enrollmentRequest = {
       student: {
         name: 'Ana Silva',
@@ -46,7 +33,8 @@ describe('EnrollStudent', () => {
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Invalid student cpf'))
   })
-  it('Should not enroll duplicated student', () => {
+
+  test('Should not enroll duplicated student', () => {
     const enrollmentRequest = {
       student: {
         name: 'Ana Silva',
@@ -61,7 +49,8 @@ describe('EnrollStudent', () => {
       new Error('Enrollment with duplicated student is not allowed')
     )
   })
-  it('Should generate enrollment code', () => {
+
+  test('Should generate enrollment code', () => {
     const enrollmentRequest = {
       student: {
         name: 'Maria Carolina Fonseca',
@@ -75,7 +64,8 @@ describe('EnrollStudent', () => {
     const enrollment = enrollStudent.execute(enrollmentRequest)
     expect(enrollment.code.value).toEqual('2021EM1A0001')
   })
-  it('Should not enroll student below minimum age', () => {
+
+  test('Should not enroll student below minimum age', () => {
     const enrollmentRequest = {
       student: {
         name: 'Maria Carolina Fonseca',
@@ -88,7 +78,8 @@ describe('EnrollStudent', () => {
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Student below minimum age'))
   })
-  it('Should not enroll student over class capacity', () => {
+
+  test('Should not enroll student over class capacity', () => {
     enrollStudent.execute({
       student: {
         name: 'Maria Carolina Fonseca',
@@ -121,7 +112,8 @@ describe('EnrollStudent', () => {
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Class is over capacity'))
   })
-  it('Should not enroll after que end of the class', () => {
+
+  test('Should not enroll after que end of the class', () => {
     const enrollmentRequest = {
       student: {
         name: 'Maria Carolina Fonseca',
@@ -134,7 +126,8 @@ describe('EnrollStudent', () => {
     }
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Class is already finished'))
   })
-  it('Should not enroll after 25% of the start of the class', () => {
+
+  test('Should not enroll after 25% of the start of the class', () => {
     const enrollmentRequest = {
       student: {
         name: 'Maria Carolina Fonseca',
@@ -148,7 +141,8 @@ describe('EnrollStudent', () => {
     console.log(new Date())
     expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error('Class is already started'))
   })
-  it('Should generate the invoices based on the number of installments, rounding each amount and applying the rest in the last invoice', () => {
+
+  test('Should generate the invoices based on the number of installments, rounding each amount and applying the rest in the last invoice', () => {
     const enrollmentRequest = {
       student: {
         name: 'Maria Carolina Fonseca',
