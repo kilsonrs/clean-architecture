@@ -18,17 +18,6 @@ export class EnrollStudent {
     this.classroomRepository = repositoryFacade.createClassroomRepository()
     this.enrollmentRepository = repositoryFacade.createEnrollmentRepository()
   }
-  // constructor(
-  //   levelRepository: LevelRepository,
-  //   moduleRepository: ModuleRepository,
-  //   classroomRepository: ClassroomRepository,
-  //   enrollmentRepository: EnrollmentRepository
-  // ) {
-  //   this.levelRepository = levelRepository
-  //   this.moduleRepository = moduleRepository
-  //   this.classroomRepository = classroomRepository
-  //   this.enrollmentRepository = enrollmentRepository
-  // }
 
   execute(enrollmentRequest: any) {
     const student = new Student(
