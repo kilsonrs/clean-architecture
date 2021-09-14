@@ -2,7 +2,6 @@
   "name": "clean-code",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
   "scripts": {
     "tsc:init": "tsc --init",
     "build": "tsc",
