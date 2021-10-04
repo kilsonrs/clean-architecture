@@ -5,13 +5,14 @@
   "scripts": {
     "tsc:init": "tsc --init",
     "build": "tsc",
-    "test": "rm -rf dist/ && tsc && jest dist/"
+    "test": "jest"
   },
   "dependencies": {
     "typescript": "^4.2.4"
   },
   "devDependencies": {
+    "ts-jest": "^27.0.5",
     "@types/jest": "^26.0.23",
-    "jest": "^26.6.3"
+    "jest": "^27.2"
   }
 }

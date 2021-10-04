@@ -11,15 +11,22 @@ export class EnrollmentRepositoryMemory implements EnrollmentRepository {
   save(enrollment: Enrollment): void {
     this.enrollments.push(enrollment)
   }
+
   findAllByClass(level: string, module: string, classroom: string): any[] {
     return this.enrollments.filter(
       (enrollment) =>
         enrollment.level.code === level && enrollment.module.code === module && enrollment.classroom.code === classroom
     )
   }
+
   findByCpf(cpf: string) {
     return this.enrollments.find((enrollment) => enrollment.student.cpf.value === cpf)
   }
+
+  findByCode(code: string) {
+    return this.enrollments.find((enrollment) => enrollment.code.value === code)
+  }
+
   count(): number {
     return this.enrollments.length
   }

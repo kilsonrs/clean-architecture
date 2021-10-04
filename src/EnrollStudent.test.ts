@@ -159,4 +159,12 @@ describe('EnrollStudent', () => {
     expect(enrollment.invoices[0].amount).toBe(1416.66)
     expect(enrollment.invoices[11].amount).toBe(1416.73)
   })
+
+  test('Should get enrollment by code with invoice balance', () => {
+    const enrollmentRequest = {
+      code: "2021EM1A0001"
+    }
+    const enrollment = enrollStudent.execute(enrollmentRequest)
+    expect(enrollment.invoices).toHaveLength(12)
+  })
 })
